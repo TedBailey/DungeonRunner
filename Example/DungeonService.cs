@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using Example.Models;
 
 namespace Example;
 
 public interface IDungeonService
 {
-    void AddDungeoneer(Dungeoneer dungeoneer);
-    Dungeoneer GetDungeoneer(string id);
-    Dungeoneer UpdateDungeoneer(Dungeoneer dungeoneer);
+    void AddDungeoneer(Dungeoneer.Dungeoneer dungeoneer);
+    Dungeoneer.Dungeoneer GetDungeoneer(string id);
+    Dungeoneer.Dungeoneer UpdateDungeoneer(Dungeoneer.Dungeoneer dungeoneer);
 }
 
 public class DungeonService : IDungeonService
 {
-    private readonly Dictionary<string, Dungeoneer> _dungeoneers = new();
+    private readonly Dictionary<string, Dungeoneer.Dungeoneer> _dungeoneers = new();
 
-    public void AddDungeoneer(Dungeoneer dungeoneer)
+    public void AddDungeoneer(Dungeoneer.Dungeoneer dungeoneer)
     {
         _dungeoneers.Add(dungeoneer.Id, dungeoneer);
     }
@@ -30,7 +29,7 @@ public class DungeonService : IDungeonService
         }
     }
 
-    public Dungeoneer GetDungeoneer(string id)
+    public Dungeoneer.Dungeoneer GetDungeoneer(string id)
     {
         if (_dungeoneers.TryGetValue(id, out var dungeoneer))
         {
@@ -40,7 +39,7 @@ public class DungeonService : IDungeonService
         throw new InvalidOperationException($"Could not find dungeoneer with id: {id}");
     }
     
-    public Dungeoneer UpdateDungeoneer(Dungeoneer dungeoneer)
+    public Dungeoneer.Dungeoneer UpdateDungeoneer(Dungeoneer.Dungeoneer dungeoneer)
     {
         if (_dungeoneers.TryGetValue(dungeoneer.Id, out var found))
         {

@@ -1,6 +1,5 @@
 using System.Reflection;
 using System.Threading.Tasks;
-using Example.MassTransit;
 using Microsoft.Extensions.Hosting;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,8 +28,8 @@ public class Program
                     var entryAssembly = Assembly.GetEntryAssembly();
 
                     x.AddConsumers(entryAssembly);
-                    x.AddSagaStateMachine<DungeonStateMachine, DungeonState>();
-                    //x.AddSagaStateMachines(entryAssembly);
+                    //x.AddSagaStateMachine<DungeonStateMachine, DungeonState>();
+                    x.AddSagaStateMachines(entryAssembly);
 
                     x.UsingInMemory((context, cfg) =>
                     {

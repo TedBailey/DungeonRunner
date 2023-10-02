@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Example.Models;
+namespace Example.Dungeoneer;
 
 public class Adventurer : Dungeoneer
 {

@@ -1,6 +1,6 @@
 ﻿using OneOf;
 
-namespace Example.Models;
+namespace Example.Dungeoneer;
 
 public class Dungeoneer
 {

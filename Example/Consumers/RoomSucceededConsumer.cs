@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
+using Example.Dungeoneer;
 using Example.MassTransit;
-using Example.Models;
 using MassTransit;
 
 namespace Example.Consumers;
