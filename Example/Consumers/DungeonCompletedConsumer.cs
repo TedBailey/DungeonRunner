@@ -1,7 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Example.MassTransit;
-using Example.Room;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 

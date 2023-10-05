@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Example.Room;
 using MassTransit;
-using OneOf;
 
 namespace Example.MassTransit;
 
