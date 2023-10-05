@@ -1,5 +1,7 @@
 using System.Reflection;
 using System.Threading.Tasks;
+using Example.Dungeoneer;
+using Example.Room;
 using Microsoft.Extensions.Hosting;
 using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,8 +30,8 @@ public class Program
                     var entryAssembly = Assembly.GetEntryAssembly();
 
                     x.AddConsumers(entryAssembly);
-                    //x.AddSagaStateMachine<DungeonStateMachine, DungeonState>();
                     x.AddSagaStateMachines(entryAssembly);
+                    x.AddInMemoryInboxOutbox();
 
                     x.UsingInMemory((context, cfg) =>
                     {
@@ -38,6 +40,7 @@ public class Program
                 });
                 
                 services.AddHostedService<DungeonWorker>();
-                services.AddSingleton<IDungeonService, DungeonService>();
+                services.AddSingleton<IDungeoneerService, DungeoneerService>();
+                services.AddSingleton<IRoomService, RoomService>();
             });
 }

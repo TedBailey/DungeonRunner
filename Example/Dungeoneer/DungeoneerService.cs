@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Example;
+namespace Example.Dungeoneer;
 
-public interface IDungeonService
+public interface IDungeoneerService
 {
-    void AddDungeoneer(Dungeoneer.Dungeoneer dungeoneer);
-    Dungeoneer.Dungeoneer GetDungeoneer(string id);
-    Dungeoneer.Dungeoneer UpdateDungeoneer(Dungeoneer.Dungeoneer dungeoneer);
+    void AddDungeoneer(Example.Dungeoneer.Dungeoneer dungeoneer);
+    Example.Dungeoneer.Dungeoneer GetDungeoneer(string id);
+    Example.Dungeoneer.Dungeoneer UpdateDungeoneer(Example.Dungeoneer.Dungeoneer dungeoneer);
 }
 
-public class DungeonService : IDungeonService
+public class DungeoneerService : IDungeoneerService
 {
-    private readonly Dictionary<string, Dungeoneer.Dungeoneer> _dungeoneers = new();
+    private readonly Dictionary<string, Example.Dungeoneer.Dungeoneer> _dungeoneers = new();
 
-    public void AddDungeoneer(Dungeoneer.Dungeoneer dungeoneer)
+    public void AddDungeoneer(Example.Dungeoneer.Dungeoneer dungeoneer)
     {
         _dungeoneers.Add(dungeoneer.Id, dungeoneer);
     }
@@ -29,7 +29,7 @@ public class DungeonService : IDungeonService
         }
     }
 
-    public Dungeoneer.Dungeoneer GetDungeoneer(string id)
+    public Example.Dungeoneer.Dungeoneer GetDungeoneer(string id)
     {
         if (_dungeoneers.TryGetValue(id, out var dungeoneer))
         {
@@ -39,7 +39,7 @@ public class DungeonService : IDungeonService
         throw new InvalidOperationException($"Could not find dungeoneer with id: {id}");
     }
     
-    public Dungeoneer.Dungeoneer UpdateDungeoneer(Dungeoneer.Dungeoneer dungeoneer)
+    public Example.Dungeoneer.Dungeoneer UpdateDungeoneer(Example.Dungeoneer.Dungeoneer dungeoneer)
     {
         if (_dungeoneers.TryGetValue(dungeoneer.Id, out var found))
         {

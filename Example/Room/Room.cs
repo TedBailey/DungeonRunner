@@ -14,18 +14,26 @@ public enum RoomStatus
 public interface IRoom
 {
     public Guid Id { get; init; }
+    public string Name { get; init; }
 
     internal OneOf<RoomSuccess, RoomFailure, RoomInternalError> Loot();
 }
 
 public class BaseRoom : IRoom
 {
+    // Default constructor
     public BaseRoom()
     {
+    }
+    
+    public BaseRoom(string name)
+    {
         Id = Guid.NewGuid();
+        Name = name;
     }
     
     public Guid Id { get; init; }
+    public string Name { get; init; }
     
     public OneOf<RoomSuccess, RoomFailure, RoomInternalError> Loot()
     {

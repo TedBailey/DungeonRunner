@@ -41,6 +41,9 @@
           }
         }
       },
+      "MassTransit.Analyzers/8.1.1": {
+        "type": "package"
+      },
       "Microsoft.Extensions.Configuration/7.0.0": {
         "type": "package",
         "dependencies": {
@@ -780,6 +783,23 @@
         "masstransit.abstractions.8.1.0.nupkg.sha512",
         "masstransit.abstractions.nuspec",
         "mt-logo-small.png"
+      ]
+    },
+    "MassTransit.Analyzers/8.1.1": {
+      "sha512": "Va91qUOXOZoCnQvIf2x0Vm6+BPcLlrtHwrWt9Xz+YOITFIIXBfWrpZQDF96fkIuzWaj8GvHo8GW1nUZr/kNx/g==",
+      "type": "package",
+      "path": "masstransit.analyzers/8.1.1",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "NuGet.README.md",
+        "analyzers/dotnet/cs/MassTransit.Analyzers.dll",
+        "masstransit.analyzers.8.1.1.nupkg.sha512",
+        "masstransit.analyzers.nuspec",
+        "mt-logo-small.png",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
       ]
     },
     "Microsoft.Extensions.Configuration/7.0.0": {
@@ -1878,6 +1898,7 @@
   "projectFileDependencyGroups": {
     "net7.0": [
       "MassTransit >= 8.1.0",
+      "MassTransit.Analyzers >= 8.1.1",
       "Microsoft.Extensions.Hosting >= 7.0.1",
       "OneOf >= 3.0.263"
     ]
@@ -1931,6 +1952,12 @@
           "MassTransit": {
             "target": "Package",
             "version": "[8.1.0, )"
+          },
+          "MassTransit.Analyzers": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[8.1.1, )"
           },
           "Microsoft.Extensions.Hosting": {
             "target": "Package",

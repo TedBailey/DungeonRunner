@@ -7,16 +7,16 @@ namespace Example.Consumers;
 
 public class RoomSucceededConsumer : IConsumer<RoomSucceeded>
 {
-    private readonly IDungeonService _dungeonService;
+    private readonly IDungeoneerService _dungeoneerService;
 
-    public RoomSucceededConsumer(IDungeonService dungeonService)
+    public RoomSucceededConsumer(IDungeoneerService dungeoneerService)
     {
-        _dungeonService = dungeonService;
+        _dungeoneerService = dungeoneerService;
     }
     
     public Task Consume(ConsumeContext<RoomSucceeded> context)
     {
-        var dungeoneer = _dungeonService.GetDungeoneer(context.Message.DungeoneerId);
+        var dungeoneer = _dungeoneerService.GetDungeoneer(context.Message.DungeoneerId);
 
         if (dungeoneer is not Adventurer adventurer)
         {
@@ -24,11 +24,8 @@ public class RoomSucceededConsumer : IConsumer<RoomSucceeded>
         }
         
         adventurer.AddGold(10);
-        _dungeonService.UpdateDungeoneer(adventurer);
+        _dungeoneerService.UpdateDungeoneer(adventurer);
         
-        // Go to the next room!
-        context.Publish(new EnterRoomEvent(context.Message.DungeonId, context.Message.RoomNumber + 1));
-
         return Task.CompletedTask;
     }
 }

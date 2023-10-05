@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Example.Room;
 using MassTransit;
+using OneOf;
 
 namespace Example.MassTransit;
 
@@ -11,19 +12,22 @@ public class DungeonState : SagaStateMachineInstance
     public Guid CorrelationId { get; set; }
     public string DungeoneerId { get; set; }
     public int State { get; set; }
-    public int NumberOfRooms { get; set; }
 
-    public bool AllRoomsComplete => Rooms.Any(x => x.Key is not (RoomStatus.Success or RoomStatus.Failure));
+    public bool AllRoomsComplete => Rooms.All(x => x.Value is (RoomStatus.Success or RoomStatus.Failure));
 
-    public IRoom TryGetNextPendingRoom => Rooms[RoomStatus.Pending][0];
+    public Guid GetNextPendingRoomId()
+    {
+        var pendingRooms = Rooms
+            .Where(room => room.Value == RoomStatus.Pending)
+            .ToList();
+
+        return pendingRooms.First().Key;
+    }
+    
+    public Dictionary<Guid, RoomStatus> Rooms { get; set; }
 
     public void SetRoomStatus(Guid roomId, RoomStatus status)
     {
-        /*var room = Rooms.Single(x => x.Value.First(y => y.Id == roomId));
-        Rooms[status].Remove(room);
-        Rooms*/
+        Rooms[roomId] = status;
     }
-
-    // Rooms can have a status to them
-    public Dictionary<RoomStatus, List<IRoom>> Rooms { get; set; }
 }

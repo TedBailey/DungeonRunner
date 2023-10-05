@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Example.Dungeoneer;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
@@ -7,20 +8,20 @@ namespace Example.Consumers;
 public class DungeonRunConsumer : IConsumer<Contracts.DungeonRun>
 {
     private readonly ILogger<DungeonRunConsumer> _logger;
-    private readonly IDungeonService _dungeonService;
+    private readonly IDungeoneerService _dungeoneerService;
 
     public DungeonRunConsumer(
         ILogger<DungeonRunConsumer> logger,
-        IDungeonService dungeonService
+        IDungeoneerService dungeoneerService
         )
     {
         _logger = logger;
-        _dungeonService = dungeonService;
+        _dungeoneerService = dungeoneerService;
     }
     
     public Task Consume(ConsumeContext<Contracts.DungeonRun> context)
     {
-        var dungeoneer = _dungeonService.GetDungeoneer(context.Message.Dungeoneer.Id);
+        var dungeoneer = _dungeoneerService.GetDungeoneer(context.Message.Dungeoneer.Id);
         
         _logger.LogInformation("{correlationId} | Received Dungeoneer: {name}, Health {health}",
             context.CorrelationId,
